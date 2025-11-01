@@ -54,12 +54,12 @@ cd ..
 echo.
 echo ========================================
 echo Биллд завершен успешно!
-echo Exе: build\bin\HelloWorld.exe
+echo Exе: build\bin\lab1.exe
 echo ========================================
 
 echo.
 echo Раннинг the program...
 echo.
-build\bin\HelloWorld.exe
+build\bin\lab1.exe
 
 pause

@@ -61,9 +61,9 @@ cd ..
 echo
 echo -e "${GREEN}========================================"
 echo "Билд комплитед саксесфули!"
-echo "Экзекьютабл: build/bin/HelloWorld"
+echo "Экзекьютабл: build/bin/lab1"
 echo -e "========================================${NC}"
 echo
 echo "Раннинг зе программ..."
 echo
-./build/bin/HelloWorld
+./build/bin/lab1
