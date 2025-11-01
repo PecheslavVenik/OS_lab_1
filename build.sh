@@ -1,81 +1,69 @@
 #!/bin/bash
 
 echo "========================================"
-echo "Build Script for Linux"
+echo "СКРИПТ_ДЛЯ_ЛИНУКСОВ.sh"
 echo "========================================"
 
-# Цвета для вывода
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# Проверка наличия git
 if ! command -v git &> /dev/null; then
-    echo -e "${RED}Error: Git is not installed${NC}"
+    echo -e "${RED}Git ис нот инстолд${NC}"
     exit 1
 fi
 
-# Проверка наличия cmake
 if ! command -v cmake &> /dev/null; then
-    echo -e "${RED}Error: CMake is not installed${NC}"
+    echo -e "${RED}CMake ис нот инстолд${NC}"
     exit 1
 fi
 
-# Проверка наличия g++
 if ! command -v g++ &> /dev/null; then
-    echo -e "${RED}Error: g++ is not installed${NC}"
+    echo -e "${RED}g++ ис нот инстолд${NC}"
     exit 1
 fi
 
-# Обновление из git репозитория
 echo
-echo "Updating from Git repository..."
+echo "git pull origin main..."
 git pull origin main
 if [ $? -ne 0 ]; then
-    echo -e "${YELLOW}Warning: Failed to pull from git repository${NC}"
-    echo "Continuing with local version..."
+    echo -e "${YELLOW}Нет интернета...${NC}"
+    echo "Продолжаем без пула..."
 fi
 
-# Создание директории для сборки
 if [ ! -d "build" ]; then
     mkdir build
 fi
 
-# Переход в директорию сборки
 cd build
 
-# Генерация проекта с помощью CMake
 echo
-echo "Configuring project with CMake..."
+echo "Конфьигуринг проджект виз CMake..."
 cmake ..
 if [ $? -ne 0 ]; then
-    echo -e "${RED}Error: CMake configuration failed${NC}"
+    echo -e "${RED}Эррор: CMake конфигурэйшн фэилд${NC}"
     cd ..
     exit 1
 fi
 
-# Компиляция проекта
 echo
-echo "Building project..."
+echo "Билдинг зе проджект..."
 make -j$(nproc)
 if [ $? -ne 0 ]; then
-    echo -e "${RED}Error: Build failed${NC}"
+    echo -e "${RED}Эррор: Билд фэилд${NC}"
     cd ..
     exit 1
 fi
 
-# Возврат в корневую директорию
 cd ..
 
 echo
 echo -e "${GREEN}========================================"
-echo "Build completed successfully!"
-echo "Executable: build/bin/HelloWorld"
+echo "Билд комплитед саксесфули!"
+echo "Экзекьютабл: build/bin/HelloWorld"
 echo -e "========================================${NC}"
-
-# Запуск программы
 echo
-echo "Running the program..."
+echo "Раннинг зе программ..."
 echo
 ./build/bin/HelloWorld

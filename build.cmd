@@ -2,72 +2,63 @@
 setlocal enabledelayedexpansion
 
 echo ========================================
-echo Build Script for Windows
+echo СКРИПТ_ДЛЯ_ШИНДОУС.cmd
 echo ========================================
 
-:: Проверка наличия git
 where git >nul 2>nul
 if %errorlevel% neq 0 (
-    echo Error: Git is not installed or not in PATH
+    echo Гит не установлен
     exit /b 1
 )
 
-:: Проверка наличия cmake
 where cmake >nul 2>nul
 if %errorlevel% neq 0 (
-    echo Error: CMake is not installed or not in PATH
+    echo Симейк не установлен
     exit /b 1
 )
 
-:: Обновление из git репозитория
 echo.
-echo Updating from Git repository...
+echo Пулл из гит репозитория...
 git pull origin main
 if %errorlevel% neq 0 (
-    echo Warning: Failed to pull from git repository
-    echo Continuing with local version...
+    echo Нет интернета или ошибка гита.
+    echo Продолжаем так ладно
 )
 
-:: Создание директории для сборки
 if not exist build (
     mkdir build
 )
 
-:: Переход в директорию сборки
 cd build
 
-:: Генерация проекта с помощью CMake
 echo.
-echo Configuring project with CMake...
+echo Симейк конфигуринг проджект...
 cmake .. -G "MinGW Makefiles"
 if %errorlevel% neq 0 (
-    echo Error: CMake configuration failed
+    echo Симейк конфигуринг провален
     cd ..
     exit /b 1
 )
 
-:: Компиляция проекта
 echo.
-echo Building project...
+echo Сборка...
 cmake --build . --config Debug
 if %errorlevel% neq 0 (
-    echo Error: Build failed
+    echo Сборка провалена
     cd ..
     exit /b 1
 )
 
-:: Возврат в корневую директорию
 cd ..
 
 echo.
 echo ========================================
-echo Build completed successfully!
-echo Executable: build\bin\HelloWorld.exe
+echo Биллд завершен успешно!
+echo Exе: build\bin\HelloWorld.exe
 echo ========================================
 
-:: Запуск программы
 echo.
-echo Running the program...
+echo Раннинг the program...
 echo.
 build\bin\HelloWorld.exe
 

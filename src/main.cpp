@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 
 #ifdef _WIN32
     #define OS_NAME "Windows"
@@ -13,7 +12,7 @@
 
 int main() {
     std::cout << "Hello World!" << std::endl;
-    std::cout << "Operating System: " << OS_NAME << std::endl;
+    std::cout << "ОСЬ: " << OS_NAME << std::endl;
 
     return 0;
 }
